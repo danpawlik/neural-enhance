@@ -1,3 +1,17 @@
+READ IT FIRST
+=============
+
+The main project from `alexjc/neural-enhance` is deprecated.
+The dockerfile was recreated to be compatible with this tool, but it
+uses old Python 3 version (3.5).
+
+tl;dr
+.. code:: bash
+
+  docker build -t neutral-enhance -f docker-cpu.df
+
+  docker run -v /home/Pictures:/ne/input:Z -it neutral-enhance --model=repair "/ne/input/MyPhoto.jpg"
+
 Neural Enhance
 ==============
 
@@ -53,7 +67,7 @@ Here's a list of currently supported models, image types, and zoom levels in one
 ==================  =====================  ====================  =====================  ====================
      FEATURES        ``--model=default``    ``--model=repair``    ``--model=denoise``    ``--model=deblur``
 ==================  =====================  ====================  =====================  ====================
- ``--type=photo``            2x                     1x                     …                      …         
+ ``--type=photo``            2x                     1x                     …                      …
 ==================  =====================  ====================  =====================  ====================
 
 
@@ -71,7 +85,7 @@ Pre-trained models are provided in the GitHub releases.  Training your own is a 
     python3.4 enhance.py --train "data/*.jpg" --model custom --scales=2 --epochs=50 \
         --perceptual-layer=conv2_2 --smoothness-weight=1e7 --adversary-weight=0.0 \
         --generator-blocks=4 --generator-filters=64
-    
+
     # Train the model using an adversarial setup based on [4] below.
     python3.4 enhance.py --train "data/*.jpg" --model custom --scales=2 --epochs=250 \
              --perceptual-layer=conv5_2 --smoothness-weight=2e4 --adversary-weight=1e3 \
@@ -114,7 +128,7 @@ Here's the simplest way you can call the script using ``docker``, assuming you'r
 **Multiple Images** — To enhance multiple images in a row (faster) from a folder or wildcard specification, make sure to quote the argument to the alias command:
 
 .. code:: bash
-    
+
     # Process multiple images, make sure to quote the argument!
     enhance --zoom=2 "images/*.jpg"
 
